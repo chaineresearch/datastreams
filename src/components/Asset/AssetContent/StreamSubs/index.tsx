@@ -20,6 +20,7 @@ export default function StreamSubs() {
           type="text"
           value={endpointFormatted}
           // readOnly={true}
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           onChange={() => {}}
           // disabled={true}
           // prefix={accountTruncate(`${asset.services[0].streamFiles}`)}
