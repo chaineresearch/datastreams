@@ -6,19 +6,19 @@
       "subsInfo": "Enter an amount of units, the unit of time, and the price for that number of units.",
       "subsRatioInfo": "The amount of the selected base token determines the value of the datatoken.",
       "rowInfo": "Rows that are incomplete will be dropped.",
-      "time": "Define how long buyers should be able to subscribe the datastream again after the initial subscribtion.",
+      "time": "Define how long buyers should be able to subscribe to the datastream again after the initial subscribtion.",
       "tooltips": {
         "communityFee": "Goes to Ocean DAO for teams to improve the tools, build apps, do outreach, and more. A small fraction is used to burn OCEAN. This fee is collected when downloading or using an asset in a compute job.",
         "marketplaceFee": "Goes to the marketplace owner that is hosting and providing the marketplace and is collected when downloading or using an asset in a compute job. In Ocean Market, it is treated as network revenue that goes to the Ocean community."
       },
       "duration": {
         "title": "Timeout",
-        "help": "Define how long buyers should be able to subscribe the datastream again after the initial subscribtion.",
+        "help": "Define how long buyers should be able to subscribe to the datastream again after the initial subscribtion.",
         "type": "select",
         "options": [
           "minute",
           "hour",
-          " day",
+          "day",
           "week",
           "month",
           "year",
@@ -44,7 +44,7 @@
           "name": "freeAgreement",
           "type": "checkbox",
           "options": [
-            "I want this asset to be free. I understand network fees are still to be paid"
+            "I want this asset to be free. I understand network fees are still to be paid."
           ]
         }
       ]
