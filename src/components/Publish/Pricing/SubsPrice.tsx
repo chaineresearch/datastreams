@@ -522,7 +522,7 @@ function EditToolbar(props: EditToolbarProps) {
   return (
     <GridToolbarContainer>
       <Button color="secondary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add record
+        Add subscription row
       </Button>
     </GridToolbarContainer>
   )
@@ -662,16 +662,16 @@ export function FullFeaturedCrudGrid() {
 
   const columns: GridColumns = [
     {
-      field: 'unit',
-      headerName: 'Unit',
+      field: 'amount',
+      headerName: 'Amount',
       headerClassName: 'super-app-theme--header',
       type: 'number',
       width: 130,
       editable: true
     },
     {
-      field: 'time',
-      headerName: 'Time',
+      field: 'duration',
+      headerName: 'Duration',
       headerClassName: 'super-app-theme--header',
       renderEditCell: renderSelectTimeEditInputCell,
       type: 'string',
@@ -792,14 +792,14 @@ export function FullFeaturedCrudGrid() {
           borderRadius: 0
         },
         '& .MuiDataGrid-cell': {
-          color: '#F40691'
+          color: '#fff'
         },
         '& .MuiDataGrid-cell--editable': {
           bgcolor: (theme) =>
             theme.palette.mode === 'dark' ? 'white' : '#100c08'
         },
         '& .super-app-theme--header': {
-          backgroundColor: '#F40691'
+          backgroundColor: '#000'
         },
         // backgroundColor: 'white',
         m: 2,
@@ -807,7 +807,7 @@ export function FullFeaturedCrudGrid() {
           color: '#F40691'
         },
         '& .textPrimary': {
-          color: '#F40691'
+          color: '#fff'
         }
       }}
     >
