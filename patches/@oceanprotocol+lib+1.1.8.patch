@@ -35,3 +35,16 @@ index 7c88c20..42f2499 100644
      /**
       * Datatoken address
       * @type {string}
+diff --git a/node_modules/@oceanprotocol/lib/dist/src/@types/FixedPrice.d.ts b/node_modules/@oceanprotocol/lib/dist/src/@types/FixedPrice.d.ts
+index 0932ef9..a1752de 100644
+--- a/node_modules/@oceanprotocol/lib/dist/src/@types/FixedPrice.d.ts
++++ b/node_modules/@oceanprotocol/lib/dist/src/@types/FixedPrice.d.ts
+@@ -6,6 +6,8 @@ export interface FreCreationParams {
+     baseTokenDecimals: number;
+     datatokenDecimals: number;
+     fixedRate: string;
++    timedRate: string;
++    assetType: string;
+     marketFee: string;
+     withMint?: boolean;
+     allowedConsumer?: string;

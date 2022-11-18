@@ -13,7 +13,7 @@
         "name": "type",
         "label": "Asset Type",
         "type": "boxSelection",
-        "options": ["Dataset", "Algorithm", "DataStream"],
+        "options": ["Dataset", "Algorithm", "Datastream"],
         "required": true
       },
       {
@@ -140,7 +140,14 @@
         "label": "Timeout",
         "help": "Define how long buyers should be able to download the dataset again after the initial purchase.",
         "type": "select",
-        "options": ["Forever", "1 day", "1 week", "1 month", "1 year"],
+        "options": [
+          "Forever",
+          "1 day",
+          "1 week",
+          "1 month",
+          "1 year",
+          "Use timed pricing"
+        ],
         "sortOptions": false,
         "required": true
       }

@@ -1,32 +1,41 @@
 /* eslint-disable prettier/prettier */
 import { useAsset } from '@context/Asset'
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './index.module.css'
 import { LoggerInstance } from '@oceanprotocol/lib'
-import { accountTruncate, endpointTruncate } from '@utils/web3'
+import { endpointTruncate } from '@utils/web3'
 import Input from '@shared/FormInput'
 
 export default function StreamSubs() {
+  // const { values } = useFormikContext<FormPublishData>()
   const { asset } = useAsset()
-  LoggerInstance.log('asset_:', asset)
   const endpointFormatted = endpointTruncate(asset)
+
+  useEffect(() => {
+    LoggerInstance.log('asset_:', asset)
+  }, [asset])
 
   return (
     asset?.metadata.type === 'datastream' && (
-      <div className={styles.stats}>
-        <label className={styles.label}>Datastream EndPoint</label>
-        <section className={styles.endpoint}>
-          <Input
-            type="text"
-            value={endpointFormatted}
-            // readOnly={true}
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
-            onChange={() => {}}
-            // disabled={true}
-            // prefix={accountTruncate(`${asset.services[0].streamFiles}`)}
-          />
-        </section>
-      </div>
+      <>
+        <div>
+          {/* <SubsPriceUnit /> */}
+          {/* <MetaSubsPrice /> */}
+        </div>
+        <div className={styles.stats}>
+          {/* <MetaSubsPrice ddo={asset} /> */}
+          <label className={styles.label}>Datastream EndPoint</label>
+          <section className={styles.endpoint}>
+            <Input
+              type="text"
+              value={endpointFormatted}
+              // readOnly={true}
+              // eslint-disable-next-line @typescript-eslint/no-empty-function
+              onChange={() => {}}
+            />
+          </section>
+        </div>
+      </>
     )
   )
 }

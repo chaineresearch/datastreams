@@ -1,8 +1,36 @@
 {
   "create": {
+    "timed": {
+      "title": "Timed",
+      "info": "Set your time-based prices for subscribing to this datastream.",
+      "subsInfo": "Enter an amount of units, the duration, and the price for that number of units.",
+      "subsRatioInfo": "The amount of the selected base token determines the value of the datatoken.",
+      "rowInfo": "Rows that are incomplete will be dropped.",
+      "time": "Define when buyers should be able to subscribe to the datastream again after the initial subscribtion.",
+      "tooltips": {
+        "communityFee": "Goes to Ocean DAO for teams to improve the tools, build apps, do outreach, and more. A small fraction is used to burn OCEAN. This fee is collected when downloading or using an asset in a compute job.",
+        "marketplaceFee": "Goes to the marketplace owner that is hosting and providing the marketplace and is collected when downloading or using an asset in a compute job. In Ocean Market, it is treated as network revenue that goes to the Ocean community."
+      },
+      "duration": {
+        "title": "Timeout",
+        "help": "Define when buyers should be able to subscribe to the datastream again after the initial subscribtion.",
+        "type": "select",
+        "options": [
+          "minute",
+          "hour",
+          "day",
+          "week",
+          "month",
+          "year",
+          "forever"
+        ],
+        "sortOptions": false,
+        "required": false
+      }
+    },
     "fixed": {
       "title": "Fixed",
-      "info": "Set your price for accessing this dataset. The datatoken for this dataset will be worth the entered amount of the selected base token.",
+      "info": "Set your price for accessing this asset. The datatoken for this asset will be worth the entered amount of the selected base token.",
       "tooltips": {
         "communityFee": "Goes to Ocean DAO for teams to improve the tools, build apps, do outreach, and more. A small fraction is used to burn OCEAN. This fee is collected when downloading or using an asset in a compute job.",
         "marketplaceFee": "Goes to the marketplace owner that is hosting and providing the marketplace and is collected when downloading or using an asset in a compute job. In Ocean Market, it is treated as network revenue that goes to the Ocean community."
@@ -10,13 +38,13 @@
     },
     "free": {
       "title": "Free",
-      "info": "Set your dataset as free. The datatoken for this dataset will be given for free via creating a faucet.",
+      "info": "Set your asset to free. The datatoken for this asset will be provided for free via a faucet.",
       "fields": [
         {
           "name": "freeAgreement",
           "type": "checkbox",
           "options": [
-            "I want this asset to be free. I understand network fees are still to be paid"
+            "I want this asset to be free. I understand network fees are still to be paid."
           ]
         }
       ]
@@ -25,7 +53,7 @@
   "approval": {
     "tooltips": {
       "approveSpecific": "Give the smart contract permission to spend your COIN which has to be done for each transaction. You can optionally set this to infinite in your user preferences.",
-      "approveInfinite": "Give the smart contract permission to spend infinte amounts of your COIN so you have to do this only once. You can disable allowing infinite amounts in your user preferences."
+      "approveInfinite": "Give the smart contract permission to spend infinite amounts of your COIN so you have to do this only once. You can disable allowing infinite amounts in your user preferences."
     }
   }
 }

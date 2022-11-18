@@ -224,6 +224,7 @@ export async function createTokensAndPricing(
   let erc721Address, datatokenAddress, txHash
 
   switch (values.pricing.type) {
+    case 'timed':
     case 'fixed': {
       const freParams: FreCreationParams = {
         fixedRateAddress: config.fixedRateExchangeAddress,
@@ -233,12 +234,15 @@ export async function createTokensAndPricing(
         baseTokenDecimals: values.pricing.baseToken.decimals,
         datatokenDecimals: 18,
         fixedRate: values.pricing.price.toString(),
+        timedRate: values.pricing.subsPrice.toString(),
+        assetType: values.pricing.type,
         marketFee: publisherMarketFixedSwapFee,
         withMint: true
       }
 
       LoggerInstance.log(
-        '[publish] Creating fixed pricing with freParams',
+        // '[publish] Creating fixed pricing with freParams',
+        `[publish] Creating ${freParams.assetType} pricing with freParams`,
         freParams
       )
 
@@ -253,7 +257,7 @@ export async function createTokensAndPricing(
       datatokenAddress = result.events.TokenCreated.returnValues[0]
       txHash = result.transactionHash
 
-      LoggerInstance.log('[publish] createNftErcWithFixedRate tx', txHash)
+      LoggerInstance.log('[publish] createNftErcWithTimedRate tx', txHash)
 
       break
     }
