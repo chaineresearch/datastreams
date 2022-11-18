@@ -35,7 +35,7 @@
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.10",
     "@mui/x-data-grid-generator": "^5.17.8",
-    "@netlify/plugin-nextjs": "^4.16.0",
+    "@netlify/plugin-nextjs": "^4.29.1",
     "@oceanprotocol/art": "^3.2.0",
     "@oceanprotocol/lib": "^1.1.8",
     "@oceanprotocol/typographies": "^0.1.0",

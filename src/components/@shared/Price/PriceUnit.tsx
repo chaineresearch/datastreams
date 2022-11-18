@@ -4,7 +4,6 @@ import { formatCurrency } from '@coingecko/cryptoformat'
 import Conversion from './Conversion'
 import styles from './PriceUnit.module.css'
 import { useUserPreferences } from '@context/UserPreferences'
-import SubsPriceUnit from './SubsPriceUnit'
 
 export function formatPrice(price: string, locale: string): string {
   return formatCurrency(Number(price), '', locale, false, {
@@ -51,7 +50,6 @@ export default function PriceUnit({
               {conversion && <Conversion price={price} symbol={symbol} />}
             </div>
           </div>
-          <SubsPriceUnit />
         </>
       ) : (
         <>

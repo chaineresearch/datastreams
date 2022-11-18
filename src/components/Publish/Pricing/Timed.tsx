@@ -36,32 +36,7 @@ export default function Timed({
 
       <h4 className={styles.title}>Subscription Prices</h4>
       <FormHelp>{content.subsInfo}</FormHelp>
-      {/* <TableApp /> */}
-      {/* <StartEditButtonGrid /> */}
-      {/* <SuccessApp /> */}
-      {/* <SignupForm /> */}
-      {/* <FormikArray /> */}
-      {/* <_FormikPricing /> */}
-      {/* <FormikPricing /> */}
-      {/* <Editable /> */}
-      {/* <TableDemo /> */}
-      {/* <MaterialStory selectableRows={true} expandableRows={true} /> */}
-      {/* <TableApp /> */}
-      {/* <TableApp2 /> */}
-      {/* <SubsPrice approvedBaseTokens={approvedBaseTokens} title={''} tooltip={''} /> */}
-      {/* <Example /> */}
-      {/* <PricingApp /> */}
-      {/* <FormikApp /> */}
-      {/* <BasicEditPanelDemo /> */}
-      {/* <SpanningTable /> */}
-      {/* <CustomEditComponent /> */}
-      {/* <BulkEdit /> */}
-      {/* <ValueParserSetterGrid /> */}
       <FullFeaturedCrudGrid />
-      {/* <SubsPriceUnit /> */}
-      {/* < AntDesignGrid /> */}
-      {/* <StreamPricing /> */}
-      {/* <Friends name={undefined} handleAdd={undefined} handleRemove={undefined} /> */}
     </>
   )
 }

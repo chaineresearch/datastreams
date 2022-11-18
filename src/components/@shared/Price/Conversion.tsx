@@ -13,11 +13,17 @@ export const UnformattedConvertedPrice = () => {
   const [priceConvertedJson, setPriceConvertedJson] = useState(null)
   const { values, setFieldValue } = useFormikContext<FormPublishData>()
 
-  const symbol = values.pricing?.baseToken?.symbol
-  const priceTokenId = getCoingeckoTokenId(symbol)
-
   useEffect(() => {
-    if (!prices || !symbol || !priceTokenId || !prices[priceTokenId]) {
+    const symbol = values?.pricing?.baseToken?.symbol
+    const priceTokenId = getCoingeckoTokenId(symbol)
+
+    if (
+      !prices ||
+      !symbol ||
+      !priceTokenId ||
+      !prices[priceTokenId] ||
+      !values
+    ) {
       return
     }
 
@@ -30,7 +36,7 @@ export const UnformattedConvertedPrice = () => {
     }
     setPriceConverted(conversionValue)
     setPriceConvertedJson(convertedJson)
-  }, [prices, currency, priceTokenId, symbol])
+  }, [prices, currency, values, locale])
 
   return priceConvertedJson
 }
@@ -48,8 +54,11 @@ export default function Conversion({
 }): ReactElement {
   const { prices } = usePrices()
   const { currency, locale } = useUserPreferences()
-
+  const savedPrice = JSON.parse(localStorage.getItem('savedPrice'))
   const [priceConverted, setPriceConverted] = useState('0.00')
+  const [unformattedPrice, setUnformattedPrice] = useState(savedPrice || '0.00')
+
+  localStorage.setItem('savedPrice', JSON.stringify(unformattedPrice))
   // detect fiat, only have those kick in full @coingecko/cryptoformat formatting
   const isFiat = !isCrypto(currency)
   // isCrypto() only checks for BTC & ETH & unknown but seems sufficient for now
@@ -71,6 +80,7 @@ export default function Conversion({
 
     const conversionValue = prices[priceTokenId][currency.toLowerCase()]
     const converted = conversionValue * Number(price)
+    setUnformattedPrice(conversionValue.toFixed(2))
     const convertedFormatted = formatCurrency(
       converted,
       // No passing of `currency` for non-fiat so symbol conversion
@@ -87,6 +97,10 @@ export default function Conversion({
       (match) => `<span>${match}</span>`
     )
     console.log({
+      prices,
+      priceTokenId,
+      currency,
+      locale,
       converted,
       conversionValue,
       convertedFormatted,

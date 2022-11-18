@@ -645,13 +645,13 @@ export function FullFeaturedCrudGrid() {
         native
         autoFocus
       >
-        <option>second(s)</option>
-        <option>minute(s)</option>
-        <option>hour(s)</option>
+        <option>sec(s)</option>
+        <option>min(s)</option>
+        <option>hr(s)</option>
         <option>day(s)</option>
-        <option>semester(s)</option>
-        <option>year(s)</option>
-        <option>forever</option>
+        <option>sem(s)</option>
+        <option>yr(s)</option>
+        <option>4evr</option>
       </Select>
     )
   }

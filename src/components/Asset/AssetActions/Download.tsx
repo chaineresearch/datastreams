@@ -18,6 +18,7 @@ import { useMarketMetadata } from '@context/MarketMetadata'
 import Alert from '@shared/atoms/Alert'
 import Loader from '@shared/atoms/Loader'
 import IconCopy from '@images/copy.svg'
+import SubsPriceUnit from '@shared/Price/SubsPriceUnit'
 
 export default function Download({
   asset,
@@ -53,6 +54,7 @@ export default function Download({
   const [isCopied, setIsCopied] = useState(false)
 
   const isUnsupportedPricing = asset?.accessDetails?.type === 'NOT_SUPPORTED'
+  const { approvedBaseTokens, chainId } = useWeb3()
 
   useEffect(() => {
     console.log({ checkAsset: asset })
@@ -93,14 +95,14 @@ export default function Download({
   }, [dtBalance])
 
   useEffect(() => {
-    LoggerInstance.log({
-      // purchasable: asset?.accessDetails.isPurchasable,
-      isAssetNetwork,
-      isBalanceSufficient,
-      isOwned,
-      hasDatatoken,
-      validOrderTx
-    })
+    // LoggerInstance.log({
+    //   // purchasable: asset?.accessDetails.isPurchasable,
+    //   isAssetNetwork,
+    //   isBalanceSufficient,
+    //   isOwned,
+    //   hasDatatoken,
+    //   validOrderTx
+    // })
     if (
       (asset?.accessDetails?.type === 'fixed' && !orderPriceAndFees) ||
       !isMounted ||
@@ -236,7 +238,7 @@ export default function Download({
                 size="large"
               />
             )}
-
+            {asset?.metadata?.type === 'datastream' && <SubsPriceUnit />}
             {!isInPurgatory && <PurchaseButton />}
           </>
         )}
@@ -245,26 +247,28 @@ export default function Download({
   }
 
   return (
-    <aside className={styles.consume}>
-      <div className={styles.info}>
-        <div className={styles.filewrapper}>
-          <FileIcon file={file} isLoading={fileIsLoading} small />
-        </div>
-        <AssetAction asset={asset} />
+    <>
+      <div className={styles.filewrapper}>
+        <FileIcon file={file} isLoading={fileIsLoading} small />
       </div>
-      {/* {asset?.metadata.type === 'datastream' && <span>{copySuccess}</span>} */}
-      {asset?.metadata.type === 'datastream' && isCopied && (
-        <div className={styles.action}>
-          {/* <IconCopy className={styles.icon} /> */}
-          {<span className={styles.copyfeedback}>{copySuccess}</span>}
+      <aside className={styles.consume}>
+        <div className={styles.info}>
+          <AssetAction asset={asset} />
         </div>
-      )}
-      {asset?.metadata?.type === 'algorithm' && (
-        <AlgorithmDatasetsListForCompute
-          algorithmDid={asset.id}
-          asset={asset}
-        />
-      )}
-    </aside>
+        {/* {asset?.metadata.type === 'datastream' && <span>{copySuccess}</span>} */}
+        {asset?.metadata.type === 'datastream' && isCopied && (
+          <div className={styles.action}>
+            {/* <IconCopy className={styles.icon} /> */}
+            {<span className={styles.copyfeedback}>{copySuccess}</span>}
+          </div>
+        )}
+        {asset?.metadata?.type === 'algorithm' && (
+          <AlgorithmDatasetsListForCompute
+            algorithmDid={asset.id}
+            asset={asset}
+          />
+        )}
+      </aside>
+    </>
   )
 }

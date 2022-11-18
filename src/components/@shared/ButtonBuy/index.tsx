@@ -4,7 +4,6 @@ import Button from '../atoms/Button'
 import styles from './index.module.css'
 import Loader from '../atoms/Loader'
 import StreamSubs from 'src/components/Asset/AssetContent/StreamSubs'
-import Copy from '@shared/atoms/Copy'
 
 interface ButtonBuyProps {
   action: 'download' | 'compute' | 'stream'
@@ -198,15 +197,17 @@ export default function ButtonBuy({
       ) : (
         <>
           {action === 'stream' ? (
-            <Button
-              style="primary"
-              type={type}
-              onClick={onClick}
-              disabled={disabled}
-              className={styles.actionsCenter}
-            >
-              {buttonStreamText}
-            </Button>
+            <>
+              <Button
+                style="primary"
+                type={type}
+                onClick={onClick}
+                disabled={disabled}
+                className={styles.actionsCenter}
+              >
+                {buttonStreamText}
+              </Button>
+            </>
           ) : (
             <Button
               style="primary"
@@ -218,7 +219,6 @@ export default function ButtonBuy({
               {buttonText}
             </Button>
           )}
-
           <StreamSubs />
           <div className={styles.help}>
             {action === 'download'
