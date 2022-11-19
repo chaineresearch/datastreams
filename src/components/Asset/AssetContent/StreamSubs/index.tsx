@@ -24,7 +24,7 @@ export default function StreamSubs() {
         </div>
         <div className={styles.stats}>
           {/* <MetaSubsPrice ddo={asset} /> */}
-          <label className={styles.label}>Datastream EndPoint</label>
+          <label className={styles.label}>Datastream Endpoint</label>
           <section className={styles.endpoint}>
             <Input
               type="text"
