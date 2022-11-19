@@ -7,7 +7,6 @@
   padding-bottom: 0;
   font-size: var(--font-size-small);
   color: var(--color-secondary);
-  text-align: center;
 }
 
 @media (min-width: 40rem) {
@@ -37,7 +36,7 @@
   line-height: 1.2;
   display: block;
   margin-bottom: calc(var(--spacer) / 4);
-  margin-left: calc(var(--spacer) / -0.36);
+  /* margin-left: calc(var(--spacer) / -0.36); */
   /* margin-right: calc(var(--spacer) / -1); */
 }
 
