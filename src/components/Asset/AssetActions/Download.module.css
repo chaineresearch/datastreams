@@ -8,7 +8,7 @@
 .info {
   display: flex;
   width: auto;
-  padding: 0 calc(var(--spacer) / 2) 0 calc(var(--spacer) * 0.2);
+  /* padding: 0 calc(var(--spacer) / 2) 0 calc(var(--spacer) * 0.2); */
 }
 
 .filewrapper {
