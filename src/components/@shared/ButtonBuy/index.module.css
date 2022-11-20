@@ -1,6 +1,6 @@
 .actions {
-  width: 100%;
-  margin-top: calc(var(--spacer) );
+  width: 1 00%;
+  margin-top: calc(var(--spacer) * 1.25);
 }
 
 .actionsCenter {
