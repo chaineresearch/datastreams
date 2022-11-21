@@ -778,7 +778,7 @@ export function FullFeaturedCrudGrid() {
         //   borderRight: (theme) => `1px solid ${theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
         //     }`,
         // },
-        '& .MuiDataGrid-root': {
+        '& .MuiDataGrid-main': {
           font-size: '1rem'
         },
         '& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell': {
@@ -806,6 +806,9 @@ export function FullFeaturedCrudGrid() {
         },
         '& .MuiDataGrid-columnHeader': {
           color: '#fff'
+        },
+        '& .MuiDataGrid-columnHeader': {
+          font-weight: '800'
         },
         // backgroundColor: 'white',
         m: 2,
