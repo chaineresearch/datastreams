@@ -778,6 +778,9 @@ export function FullFeaturedCrudGrid() {
         //   borderRight: (theme) => `1px solid ${theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
         //     }`,
         // },
+        '& .MuiDataGrid-root': {
+          font-size: '1rem'
+        },
         '& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell': {
           borderBottom: (theme) =>
             `1px solid ${
