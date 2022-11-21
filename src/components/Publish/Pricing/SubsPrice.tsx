@@ -801,6 +801,9 @@ export function FullFeaturedCrudGrid() {
         '& .super-app-theme--header': {
           backgroundColor: '#000'
         },
+        '& .MuiDataGrid-columnHeader': {
+          color: '#fff'
+        },
         // backgroundColor: 'white',
         m: 2,
         '& .actions': {
