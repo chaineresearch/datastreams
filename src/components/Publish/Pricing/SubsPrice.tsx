@@ -778,9 +778,6 @@ export function FullFeaturedCrudGrid() {
         //   borderRight: (theme) => `1px solid ${theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
         //     }`,
         // },
-        '& .MuiDataGrid-main': {
-          font-size: '1rem'
-        },
         '& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell': {
           borderBottom: (theme) =>
             `1px solid ${
@@ -797,6 +794,9 @@ export function FullFeaturedCrudGrid() {
         '& .MuiDataGrid-cell': {
           color: '#fff'
         },
+        '& .MuiDataGrid-cell': {
+          font-size: '1rem'
+        },
         '& .MuiDataGrid-cell--editable': {
           bgcolor: (theme) =>
             theme.palette.mode === 'dark' ? 'white' : '#100c08'
@@ -808,9 +808,11 @@ export function FullFeaturedCrudGrid() {
           color: '#fff'
         },
         '& .MuiDataGrid-columnHeader': {
+          font-size: '1rem'
+        },
+        '& .MuiDataGrid-columnHeader': {
           font-weight: '800'
         },
-        // backgroundColor: 'white',
         m: 2,
         '& .actions': {
           color: '#F40691'
