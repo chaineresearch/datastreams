@@ -17,7 +17,6 @@ import { useIsMounted } from '@hooks/useIsMounted'
 import { useMarketMetadata } from '@context/MarketMetadata'
 import Alert from '@shared/atoms/Alert'
 import Loader from '@shared/atoms/Loader'
-import IconCopy from '@images/copy.svg'
 import SubsPriceUnit from '@shared/Price/SubsPriceUnit'
 
 export default function Download({

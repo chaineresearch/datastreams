@@ -755,11 +755,6 @@ export function FullFeaturedCrudGrid() {
       }
     }
   ]
-  const { appConfig } = useMarketMetadata()
-  const darkMode = useDarkMode(false, appConfig?.darkModeConfig)
-  function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    event.target.value === 'Dark' ? darkMode.enable() : darkMode.disable()
-  }
 
   return (
     <Box
@@ -788,7 +783,6 @@ export function FullFeaturedCrudGrid() {
             theme.palette.mode === 'light' ? 'black' : 'white',
           color: (theme) => 'white'
         }}
-        // sx={{ color: 'white', }}
         rows={rows}
         columns={columns}
         editMode="row"
@@ -806,179 +800,5 @@ export function FullFeaturedCrudGrid() {
         experimentalFeatures={{ newEditingApi: true }}
       />
     </Box>
-  )
-
-  // return (
-  //   <Box
-  //     sx={{
-  //       height: 500,
-  //       width: '100%',
-  //       boxShadow: 2,
-  //       backgroundColor: 'dark',
-  //       // fontFamily: [
-  //       //   '-apple-system',
-  //       //   'BlinkMacSystemFont',
-  //       //   '"Segoe UI"',
-  //       //   'Roboto',
-  //       //   '"Helvetica Neue"',
-  //       //   'Arial',
-  //       //   'sans-serif',
-  //       //   '"Apple Color Emoji"',
-  //       //   '"Segoe UI Emoji"',
-  //       //   '"Segoe UI Symbol"',
-  //       // ].join(','),
-  //       // WebkitFontSmoothing: 'auto',
-  //       // letterSpacing: 'normal',
-  //       // '& .MuiDataGrid-columnsContainer': {
-  //       //   backgroundColor: (theme) => theme.palette.mode === 'light' ? '#fafafa' : '#1d1d1d',
-  //       // },
-  //       // '& .MuiDataGrid-iconSeparator': {
-  //       //   display: 'none',
-  //       // },
-  //       // '& .MuiDataGrid-columnHeader, .MuiDataGrid-cell': {
-  //       //   borderRight: (theme) => `1px solid ${theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
-  //       //     }`,
-  //       // },
-  //       '& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell': {
-  //         borderBottom: (theme) =>
-  //           `1px solid ${
-  //             theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
-  //           }`
-  //       },
-  //       // '& .MuiDataGrid-cell': {
-  //       //   color: (theme) =>
-  //       //     theme.palette.mode === 'light' ? 'rgba(0,0,0,.85)' : 'rgba(255,255,255,0.65)',
-  //       // },
-  //       '& .MuiPaginationItem-root': {
-  //         borderRadius: 0
-  //       },
-  //       '& .MuiDataGrid-cell': {
-  //         color: '#fff'
-  //       },
-  //       '& .MuiDataGrid-cell': {
-  //         font-size: '1rem'
-  //       },
-  //       '& .MuiDataGrid-cell--editable': {
-  //         bgcolor: (theme) =>
-  //           theme.palette.mode === 'dark' ? 'white' : '#100c08'
-  //       },
-  //       '& .super-app-theme--header': {
-  //         backgroundColor: '#000'
-  //       },
-  //       '& .MuiDataGrid-columnHeader': {
-  //         color: '#fff'
-  //       },
-  //       '& .MuiDataGrid-columnHeader': {
-  //         font-size: '1rem'
-  //       },
-  //       '& .MuiDataGrid-columnHeader': {
-  //         font-weight: '800'
-  //       },
-  //       m: 2,
-  //       '& .actions': {
-  //         color: '#F40691'
-  //       },
-  //       '& .textPrimary': {
-  //         color: '#fff'
-  //       }
-  //     }}
-  //   >
-
-  //     <DataGrid
-  //       rows={rows}
-  //       columns={columns}
-  //       editMode="row"
-  //       rowModesModel={rowModesModel}
-  //       onRowModesModelChange={(newModel) => setRowModesModel(newModel)}
-  //       onRowEditStart={handleRowEditStart}
-  //       onRowEditStop={handleRowEditStop}
-  //       processRowUpdate={processRowUpdate}
-  //       components={{
-  //         Toolbar: EditToolbar
-  //       }}
-  //       componentsProps={{
-  //         toolbar: { setRows, setRowModesModel }
-  //       }}
-  //       experimentalFeatures={{ newEditingApi: true }}
-  //     />
-  //   </Box>
-  // )
-}
-
-function SelectEditInputCell(props: GridRenderCellParams) {
-  const { id, value, field } = props
-  const apiRef = useGridApiContext()
-
-  const handleChange = async (event: SelectChangeEvent) => {
-    await apiRef.current.setEditCellValue({
-      id,
-      field,
-      value: event.target.value
-    })
-    apiRef.current.stopCellEditMode({ id, field })
-  }
-
-  return (
-    <Select
-      value={value}
-      onChange={handleChange}
-      size="small"
-      sx={{ height: 1 }}
-      native
-      autoFocus
-    >
-      <option>Back-end Developer</option>
-      <option>Front-end Developer</option>
-      <option>UX Designer</option>
-    </Select>
-  )
-}
-
-const renderSelectEditInputCell: GridColDef['renderCell'] = (params) => {
-  return <SelectEditInputCell {...params} />
-}
-
-const _columns = [
-  {
-    field: 'name',
-    headerName: 'Name',
-    width: 120
-  },
-  {
-    field: 'role',
-    headerName: 'Role',
-    renderEditCell: renderSelectEditInputCell,
-    editable: true,
-    width: 180
-  }
-]
-
-const _rows = [
-  {
-    id: 1,
-    name: 'Olivier',
-    role: 'Back-end Developer'
-  },
-  {
-    id: 2,
-    name: 'Danail',
-    role: 'UX Designer'
-  },
-  {
-    id: 3,
-    name: 'Matheus',
-    role: 'Front-end Developer'
-  }
-]
-
-export default function AutoStopEditComponent() {
-  return (
-    <div style={{ height: 300, width: '100%' }}>
-      <DataGrid
-        rows={_rows}
-        columns={_columns}
-        experimentalFeatures={{ newEditingApi: true }}
-      />
-    </div>
   )
 }
