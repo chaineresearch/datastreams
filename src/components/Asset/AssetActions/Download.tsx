@@ -238,7 +238,14 @@ export default function Download({
                 size="large"
               />
             )}
-            {asset?.metadata?.type === 'datastream' && <SubsPriceUnit />}
+            {asset?.metadata?.type === 'datastream' && (
+              <>
+                <div style={{ marginTop: 22, marginBottom: -22 }}>
+                  <h5 className={styles.symbol}>Subscription Options</h5>
+                </div>
+                <SubsPriceUnit />
+              </>
+            )}
             {!isInPurgatory && <PurchaseButton />}
           </>
         )}

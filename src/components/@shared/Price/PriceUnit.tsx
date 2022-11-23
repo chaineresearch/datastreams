@@ -42,14 +42,14 @@ export default function PriceUnit({
       <h5 className={styles.symbol}>Pricing Benchmark Ratio</h5>
     </div> */}
             <div>
-              <h5 className={styles.symbol}>Subscription Options</h5>
-              {Number.isNaN(Number(price))
-                ? '-'
-                : formatPrice(price, locale)}{' '}
+              {Number.isNaN(Number(price)) ? '-' : formatPrice(price, locale)}{' '}
               <span className={styles.symbol}>{symbol}</span>
               {conversion && <Conversion price={price} symbol={symbol} />}
             </div>
           </div>
+          {/* <div style={{ marginTop: 22, marginBottom: -22 }}>
+            <h5 className={styles.symbol}>Subscription Options</h5>
+          </div> */}
         </>
       ) : (
         <>

@@ -8,6 +8,7 @@ import { grey, pink } from '@mui/material/colors'
 import { useAsset } from '@context/Asset'
 import { formatCurrency, isCrypto } from '@coingecko/cryptoformat'
 import { useUserPreferences } from '@context/UserPreferences'
+import styles from './PriceUnit.module.css'
 
 export default function SubsPriceUnit(): React.ReactElement {
   const savedSelect = JSON.parse(localStorage.getItem('selectedTimedValues'))

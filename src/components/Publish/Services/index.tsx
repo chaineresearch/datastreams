@@ -54,7 +54,7 @@ export default function ServicesFields(): ReactElement {
 
   useEffect(() => {
     if (values.metadata.type === 'datastream') {
-      setFieldValue('services[0].timeout', 'see timed pricing')
+      setFieldValue('services[0].timeout', 'Use timed pricing')
       // setFieldValue('pricing.amountDataToken', 1000)
     }
   }, [setFieldValue, values])

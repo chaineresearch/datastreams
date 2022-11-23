@@ -1,7 +1,13 @@
 /* eslint-disable prettier/prettier */
 import Conversion, { UnformattedConvertedPrice } from '@shared/Price/Conversion'
 import { useField, useFormikContext } from 'formik'
-import React, { createContext, ReactElement, useEffect, useState } from 'react'
+import React, {
+  ChangeEvent,
+  createContext,
+  ReactElement,
+  useEffect,
+  useState
+} from 'react'
 import Input from '@shared/FormInput'
 import styles from './Price.module.css'
 import { FormPublishData } from '../_types'
@@ -61,6 +67,10 @@ import CancelIcon from '@mui/icons-material/Close'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 
 import { randomId, useDemoData } from '@mui/x-data-grid-generator'
+// import styles from './Appearance.module.css'
+import _styles from '../../Header/UserPreferences/Appearance.module.css'
+import { useMarketMetadata } from '@context/MarketMetadata'
+import useDarkMode from 'use-dark-mode'
 
 const streamData = [
   {
@@ -396,8 +406,8 @@ function ccyFormat(num: number) {
 function priceRow(qty: number, unit: number) {
   return qty * unit
 }
-function conversionRow(price: number, unit: number) {
-  return price * unit
+function conversionRow(price: number) {
+  return price
 }
 
 function createRow(desc: string, qty: number, unit: number) {
@@ -492,7 +502,7 @@ const initialRows: GridRowsProp = [
   {
     id: randomId(),
     unit: 1,
-    time: 'seconds',
+    time: 'second(s)',
     price: 1
   }
 ]
@@ -511,7 +521,7 @@ function EditToolbar(props: EditToolbarProps) {
     const id = randomId()
     setRows((oldRows) => [
       ...oldRows,
-      { id, unit: 1, time: 'seconds', price: 1, isNew: true }
+      { id, unit: 1, time: 'second(s)', price: 1, isNew: true }
     ])
     setRowModesModel((oldModel) => ({
       ...oldModel,
@@ -555,7 +565,7 @@ export function FullFeaturedCrudGrid() {
   function getConversion(params: GridValueGetterParams) {
     const priceRow = params.row.price
     const unitRow = params.row.unit
-    const conversion = conversionRow(priceRow, unitRow).toFixed(2)
+    const conversion = conversionRow(priceRow).toFixed(2)
     const formattedPrice = unformattedPrice?.price
     const convertedPrice = Number(conversion) * Number(formattedPrice)
 
@@ -645,13 +655,12 @@ export function FullFeaturedCrudGrid() {
         native
         autoFocus
       >
-        <option>sec(s)</option>
-        <option>min(s)</option>
-        <option>hr(s)</option>
+        <option>second(s)</option>
+        <option>minute(s)</option>
+        <option>hour(s)</option>
         <option>day(s)</option>
-        <option>sem(s)</option>
-        <option>yr(s)</option>
-        <option>4evr</option>
+        <option>year(s)</option>
+        <option>Forever</option>
       </Select>
     )
   }
@@ -662,7 +671,7 @@ export function FullFeaturedCrudGrid() {
 
   const columns: GridColumns = [
     {
-      field: 'amount',
+      field: 'unit',
       headerName: 'Amount',
       headerClassName: 'super-app-theme--header',
       type: 'number',
@@ -670,7 +679,7 @@ export function FullFeaturedCrudGrid() {
       editable: true
     },
     {
-      field: 'duration',
+      field: 'time',
       headerName: 'Duration',
       headerClassName: 'super-app-theme--header',
       renderEditCell: renderSelectTimeEditInputCell,
@@ -689,7 +698,7 @@ export function FullFeaturedCrudGrid() {
     {
       field: 'conversion',
       headerName: 'Conversion',
-      headerClassName: 'super-app-theme--header',
+      // headerClassName: 'super-app-theme--header',
       width: 160,
       editable: true,
       valueGetter: getConversion,
@@ -746,6 +755,11 @@ export function FullFeaturedCrudGrid() {
       }
     }
   ]
+  const { appConfig } = useMarketMetadata()
+  const darkMode = useDarkMode(false, appConfig?.darkModeConfig)
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    event.target.value === 'Dark' ? darkMode.enable() : darkMode.disable()
+  }
 
   return (
     <Box
@@ -753,67 +767,13 @@ export function FullFeaturedCrudGrid() {
         height: 500,
         width: '100%',
         boxShadow: 2,
-        backgroundColor: 'dark',
-        // fontFamily: [
-        //   '-apple-system',
-        //   'BlinkMacSystemFont',
-        //   '"Segoe UI"',
-        //   'Roboto',
-        //   '"Helvetica Neue"',
-        //   'Arial',
-        //   'sans-serif',
-        //   '"Apple Color Emoji"',
-        //   '"Segoe UI Emoji"',
-        //   '"Segoe UI Symbol"',
-        // ].join(','),
-        // WebkitFontSmoothing: 'auto',
-        // letterSpacing: 'normal',
-        // '& .MuiDataGrid-columnsContainer': {
-        //   backgroundColor: (theme) => theme.palette.mode === 'light' ? '#fafafa' : '#1d1d1d',
-        // },
-        // '& .MuiDataGrid-iconSeparator': {
-        //   display: 'none',
-        // },
-        // '& .MuiDataGrid-columnHeader, .MuiDataGrid-cell': {
-        //   borderRight: (theme) => `1px solid ${theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
-        //     }`,
-        // },
-        '& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell': {
-          borderBottom: (theme) =>
-            `1px solid ${
-              theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
-            }`
+        '& .MuiDataGrid-columnHeader, .MuiDataGrid-cell': {
+          // borderRight: (theme) => `1px solid ${theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
+          //   }`,
+          // borderTop: (theme) => `1px solid ${theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
+          //   }`,
         },
-        // '& .MuiDataGrid-cell': {
-        //   color: (theme) =>
-        //     theme.palette.mode === 'light' ? 'rgba(0,0,0,.85)' : 'rgba(255,255,255,0.65)',
-        // },
-        '& .MuiPaginationItem-root': {
-          borderRadius: 0
-        },
-        '& .MuiDataGrid-cell': {
-          color: '#fff'
-        },
-        '& .MuiDataGrid-cell': {
-          font-size: '1rem'
-        },
-        '& .MuiDataGrid-cell--editable': {
-          bgcolor: (theme) =>
-            theme.palette.mode === 'dark' ? 'white' : '#100c08'
-        },
-        '& .super-app-theme--header': {
-          backgroundColor: '#000'
-        },
-        '& .MuiDataGrid-columnHeader': {
-          color: '#fff'
-        },
-        '& .MuiDataGrid-columnHeader': {
-          font-size: '1rem'
-        },
-        '& .MuiDataGrid-columnHeader': {
-          font-weight: '800'
-        },
-        m: 2,
+
         '& .actions': {
           color: '#F40691'
         },
@@ -822,8 +782,13 @@ export function FullFeaturedCrudGrid() {
         }
       }}
     >
-      {/* <SubsPriceUnit /> */}
       <DataGrid
+        sx={{
+          bgcolor: (theme) =>
+            theme.palette.mode === 'light' ? 'black' : 'white',
+          color: (theme) => 'white'
+        }}
+        // sx={{ color: 'white', }}
         rows={rows}
         columns={columns}
         editMode="row"
@@ -841,5 +806,179 @@ export function FullFeaturedCrudGrid() {
         experimentalFeatures={{ newEditingApi: true }}
       />
     </Box>
+  )
+
+  // return (
+  //   <Box
+  //     sx={{
+  //       height: 500,
+  //       width: '100%',
+  //       boxShadow: 2,
+  //       backgroundColor: 'dark',
+  //       // fontFamily: [
+  //       //   '-apple-system',
+  //       //   'BlinkMacSystemFont',
+  //       //   '"Segoe UI"',
+  //       //   'Roboto',
+  //       //   '"Helvetica Neue"',
+  //       //   'Arial',
+  //       //   'sans-serif',
+  //       //   '"Apple Color Emoji"',
+  //       //   '"Segoe UI Emoji"',
+  //       //   '"Segoe UI Symbol"',
+  //       // ].join(','),
+  //       // WebkitFontSmoothing: 'auto',
+  //       // letterSpacing: 'normal',
+  //       // '& .MuiDataGrid-columnsContainer': {
+  //       //   backgroundColor: (theme) => theme.palette.mode === 'light' ? '#fafafa' : '#1d1d1d',
+  //       // },
+  //       // '& .MuiDataGrid-iconSeparator': {
+  //       //   display: 'none',
+  //       // },
+  //       // '& .MuiDataGrid-columnHeader, .MuiDataGrid-cell': {
+  //       //   borderRight: (theme) => `1px solid ${theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
+  //       //     }`,
+  //       // },
+  //       '& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell': {
+  //         borderBottom: (theme) =>
+  //           `1px solid ${
+  //             theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
+  //           }`
+  //       },
+  //       // '& .MuiDataGrid-cell': {
+  //       //   color: (theme) =>
+  //       //     theme.palette.mode === 'light' ? 'rgba(0,0,0,.85)' : 'rgba(255,255,255,0.65)',
+  //       // },
+  //       '& .MuiPaginationItem-root': {
+  //         borderRadius: 0
+  //       },
+  //       '& .MuiDataGrid-cell': {
+  //         color: '#fff'
+  //       },
+  //       '& .MuiDataGrid-cell': {
+  //         font-size: '1rem'
+  //       },
+  //       '& .MuiDataGrid-cell--editable': {
+  //         bgcolor: (theme) =>
+  //           theme.palette.mode === 'dark' ? 'white' : '#100c08'
+  //       },
+  //       '& .super-app-theme--header': {
+  //         backgroundColor: '#000'
+  //       },
+  //       '& .MuiDataGrid-columnHeader': {
+  //         color: '#fff'
+  //       },
+  //       '& .MuiDataGrid-columnHeader': {
+  //         font-size: '1rem'
+  //       },
+  //       '& .MuiDataGrid-columnHeader': {
+  //         font-weight: '800'
+  //       },
+  //       m: 2,
+  //       '& .actions': {
+  //         color: '#F40691'
+  //       },
+  //       '& .textPrimary': {
+  //         color: '#fff'
+  //       }
+  //     }}
+  //   >
+
+  //     <DataGrid
+  //       rows={rows}
+  //       columns={columns}
+  //       editMode="row"
+  //       rowModesModel={rowModesModel}
+  //       onRowModesModelChange={(newModel) => setRowModesModel(newModel)}
+  //       onRowEditStart={handleRowEditStart}
+  //       onRowEditStop={handleRowEditStop}
+  //       processRowUpdate={processRowUpdate}
+  //       components={{
+  //         Toolbar: EditToolbar
+  //       }}
+  //       componentsProps={{
+  //         toolbar: { setRows, setRowModesModel }
+  //       }}
+  //       experimentalFeatures={{ newEditingApi: true }}
+  //     />
+  //   </Box>
+  // )
+}
+
+function SelectEditInputCell(props: GridRenderCellParams) {
+  const { id, value, field } = props
+  const apiRef = useGridApiContext()
+
+  const handleChange = async (event: SelectChangeEvent) => {
+    await apiRef.current.setEditCellValue({
+      id,
+      field,
+      value: event.target.value
+    })
+    apiRef.current.stopCellEditMode({ id, field })
+  }
+
+  return (
+    <Select
+      value={value}
+      onChange={handleChange}
+      size="small"
+      sx={{ height: 1 }}
+      native
+      autoFocus
+    >
+      <option>Back-end Developer</option>
+      <option>Front-end Developer</option>
+      <option>UX Designer</option>
+    </Select>
+  )
+}
+
+const renderSelectEditInputCell: GridColDef['renderCell'] = (params) => {
+  return <SelectEditInputCell {...params} />
+}
+
+const _columns = [
+  {
+    field: 'name',
+    headerName: 'Name',
+    width: 120
+  },
+  {
+    field: 'role',
+    headerName: 'Role',
+    renderEditCell: renderSelectEditInputCell,
+    editable: true,
+    width: 180
+  }
+]
+
+const _rows = [
+  {
+    id: 1,
+    name: 'Olivier',
+    role: 'Back-end Developer'
+  },
+  {
+    id: 2,
+    name: 'Danail',
+    role: 'UX Designer'
+  },
+  {
+    id: 3,
+    name: 'Matheus',
+    role: 'Front-end Developer'
+  }
+]
+
+export default function AutoStopEditComponent() {
+  return (
+    <div style={{ height: 300, width: '100%' }}>
+      <DataGrid
+        rows={_rows}
+        columns={_columns}
+        experimentalFeatures={{ newEditingApi: true }}
+      />
+    </div>
   )
 }
