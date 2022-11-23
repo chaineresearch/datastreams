@@ -4,11 +4,10 @@ import FormHelp from '@shared/FormInput/Help'
 import Price from './Price'
 import Fees from './Fees'
 import styles from './Fixed.module.css'
-import AutoStopEditComponent, { FullFeaturedCrudGrid } from './SubsPrice'
+import { SubsPrice } from './SubsPrice'
 import contents from '../../../../content/price.json'
 import { useFormikContext } from 'formik'
 import { FormPublishData } from '../_types'
-import FeaturedCrudGrid from './SubPriceCheck'
 
 export default function Timed({
   approvedBaseTokens,
@@ -37,7 +36,7 @@ export default function Timed({
 
       <h4 className={styles.title}>Subscription Prices</h4>
       <FormHelp>{content.subsInfo}</FormHelp>
-      <FullFeaturedCrudGrid />
+      <SubsPrice />
       {/* <FeaturedCrudGrid /> */}
       {/* <AutoStopEditComponent /> */}
     </>

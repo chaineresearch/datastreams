@@ -538,7 +538,7 @@ function EditToolbar(props: EditToolbarProps) {
   )
 }
 
-export function FullFeaturedCrudGrid() {
+export function SubsPrice() {
   const savedItem = JSON.parse(localStorage.getItem('timedValues'))
 
   const [rows, setRows] = React.useState(savedItem || initialRows)
