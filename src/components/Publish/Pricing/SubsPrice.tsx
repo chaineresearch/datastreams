@@ -531,7 +531,7 @@ function EditToolbar(props: EditToolbarProps) {
 
   return (
     <GridToolbarContainer>
-      <Button color="secondary" startIcon={<AddIcon />} onClick={handleClick}>
+      <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
         Add subscription row
       </Button>
     </GridToolbarContainer>
@@ -768,7 +768,9 @@ export function SubsPrice() {
           // borderTop: (theme) => `1px solid ${theme.palette.mode === 'light' ? '#f0f0f0' : '#303030'
           //   }`,
         },
-
+        '& .MuiDataGrid-columnHeaderTitle': {
+          font-weight: '800'
+        },
         '& .actions': {
           color: '#F40691'
         },
