@@ -50,8 +50,8 @@
 }
 
 .copyfeedback {
-  font-size: var(--font-size-mini);
+  font-size: var(--font-size-small);
   color: var(--brand-alert-green);
-  margin-top: -11rem;
+  margin-top: -10rem;
   margin-left: 12rem;
 }
