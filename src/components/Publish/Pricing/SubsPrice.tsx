@@ -71,6 +71,8 @@ import { randomId, useDemoData } from '@mui/x-data-grid-generator'
 import _styles from '../../Header/UserPreferences/Appearance.module.css'
 import { useMarketMetadata } from '@context/MarketMetadata'
 import useDarkMode from 'use-dark-mode'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { pink, purple } from '@mui/material/colors'
 
 const streamData = [
   {
@@ -529,11 +531,21 @@ function EditToolbar(props: EditToolbarProps) {
     }))
   }
 
+  const theme = createTheme({
+    palette: {
+      secondary: {
+        main: '#F40691'
+      }
+    }
+  })
+
   return (
     <GridToolbarContainer>
-      <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add subscription row
-      </Button>
+      <ThemeProvider theme={theme}>
+        <Button color="secondary" startIcon={<AddIcon />} onClick={handleClick}>
+          Add subscription row
+        </Button>
+      </ThemeProvider>
     </GridToolbarContainer>
   )
 }
@@ -773,7 +785,7 @@ export function SubsPrice() {
         },
 
         '& .actions': {
-          color: '#F40691'
+          color: pink[400]
         },
         '& .textPrimary': {
           color: '#fff'
