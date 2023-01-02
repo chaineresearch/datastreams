@@ -1,18 +1,18 @@
 # Streaming Data Asset
 
-This is a fork of the Ocean Marketplace. See below for the README. 
+This is a fork of the Ocean Marketplace for the development of the Streaming Data Asset extension. See below for the original README. 
 
-Streaming Data Asset is an extension for the Marketplace that handles streaming data sources and offers time-based pricing for subscriptions. 
+Streaming Data Asset is an extension that handles streaming data sources and offers time-based pricing for subscriptions. 
 
 - For context you could read our User Story: https://kitblake.substack.com/p/data-streams-like-rain
 - A User Guide is at: https://github.com/chaineresearch/datastreams/wiki/UserGuide
 - The UI of the fork is here: https://oceanmarket-datastreams.netlify.app/
 - Known issues are in the [Issue Tracker](https://github.com/chaineresearch/datastreams/issues). You're welcome to open an issue. 
-- The code of the initial MVP release is: https://github.com/chaineresearch/datastreams/tree/v0.1
+- The code of the initial MVP release is: https://github.com/chaineresearch/datastreams/tree/v0.2
 
 ## Setting up Netlify
 
-Developers who fork this repo will need to create a .env file for Netlify. You must add your `infuraId` in order to have prices calculated. 
+Developers who fork this repo will need to create a .env file for Netlify. You must add your `infuraId` in order to have prices in the UI calculated. 
 
 <br>
 <br>
