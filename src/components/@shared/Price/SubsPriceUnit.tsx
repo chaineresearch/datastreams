@@ -137,7 +137,7 @@ export default function SubsPriceUnit(): React.ReactElement {
   // //   </FormControl>
   // // );
 
-  const subOptions = savedItem.map(
+  const subOptions = savedItem?.map(
     (
       value: {
         price: number
