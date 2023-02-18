@@ -242,7 +242,7 @@ export default function Download({
                 <div style={{ marginTop: 22, marginBottom: -22 }}>
                   <h5 className={styles.symbol}>Subscription Options</h5>
                 </div>
-                <SubsPriceUnit />
+                <SubsPriceUnit ddo={asset} />
               </>
             )}
             {!isInPurgatory && <PurchaseButton />}

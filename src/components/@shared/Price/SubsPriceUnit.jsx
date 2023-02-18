@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 import * as React from 'react'
 import Radio from '@mui/material/Radio'
@@ -8,9 +9,10 @@ import { grey, pink } from '@mui/material/colors'
 import { useAsset } from '@context/Asset'
 import { formatCurrency, isCrypto } from '@coingecko/cryptoformat'
 import { useUserPreferences } from '@context/UserPreferences'
-import styles from './PriceUnit.module.css'
+import { Asset } from '@oceanprotocol/lib'
+import { useState } from 'react'
 
-export default function SubsPriceUnit(): React.ReactElement {
+export default function SubsPriceUnit({ ddo }) {
   const savedSelect = JSON.parse(localStorage.getItem('selectedTimedValues'))
   const savedSelectConv = JSON.parse(localStorage.getItem('selectedTimedConv'))
   const savedPrice = JSON.parse(localStorage.getItem('savedPrice'))
@@ -22,19 +24,24 @@ export default function SubsPriceUnit(): React.ReactElement {
   const { currency, locale } = useUserPreferences()
 
   const savedItem = JSON.parse(localStorage.getItem('timedValues'))
-
+  console.log({ savedItem })
   localStorage.setItem('selectedTimedValues', JSON.stringify(selectedValue))
   localStorage.setItem('selectedTimedConv', JSON.stringify(selectedSubs))
 
-  React.useEffect(() => {
-    console.log({ savedPrice })
-  }, [savedPrice])
+  // React.useEffect(() => {
+  //   if (ddo.services[0].timedPrice) {
+  //     const { timedPrice } = ddo.services[0].timedPrice.rows
+  //     setData(timedPrice);
+  //     console.log({ savedPrice, ddo, timedPrice, data, tp_rows: timedPrice })
+  //   }
 
-  const _handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  // }, [data, ddo, savedPrice])
+
+  const _handleChange = (event) => {
     setSelectedValue(event.target.value)
   }
 
-  const controlProps = (item: string) => ({
+  const controlProps = (item) => ({
     // eslint-disable-next-line eqeqeq
     checked: selectedValue == item,
     onChange: _handleChange,
@@ -136,63 +143,53 @@ export default function SubsPriceUnit(): React.ReactElement {
   // //     </RadioGroup>
   // //   </FormControl>
   // // );
+  const { timedPrice } = ddo.services[0]
+  console.log({ tprows: timedPrice?.rows })
+  const subOptions = Array.from(timedPrice?.rows).map((value) => {
+    const isFiat = !isCrypto(currency)
+    const labelUnit = value.unit.toFixed(0)
+    const labelPrice = value.price.toFixed(0)
 
-  const subOptions = savedItem?.map(
-    (
-      value: {
-        price: number
-        id: string
-        unit: number
-        time: string
-      },
-      index: string
-    ) => {
-      const symbol = asset?.accessDetails?.baseToken?.symbol
-      const isFiat = !isCrypto(currency)
-      const labelUnit = value.unit.toFixed(0)
-      const labelPrice = value.price.toFixed(0)
+    const formattedCurrencySymbol = formatCurrency(
+      Number(labelPrice) * Number(labelUnit) * Number(savedPrice),
+      isFiat ? currency : '',
+      locale,
+      false,
+      { decimalPlaces: 2 }
+    )
+    console.log(labelPrice, labelUnit, value.time)
 
-      const formattedCurrencySymbol = formatCurrency(
-        Number(labelPrice) * Number(labelUnit) * Number(savedPrice),
-        isFiat ? currency : '',
-        locale,
-        false,
-        { decimalPlaces: 2 }
-      )
-      console.log(labelPrice, labelUnit, value.time)
-
-      return (
-        <div key={index}>
-          <FormControl sx={{ m: -0.2 }} variant="standard">
-            <RadioGroup
-              aria-labelledby="demo-error-radios"
-              name={value.id}
-              value={selectedValue}
-              onChange={(e) => {
-                setSelectedSubs(formattedCurrencySymbol)
-              }}
-            >
-              <FormControlLabel
-                value={index}
-                control={
-                  <Radio
-                    {...controlProps(index)}
-                    sx={{
-                      color: grey[600],
-                      '&.Mui-checked': {
-                        color: pink[600]
-                      }
-                    }}
-                  />
-                }
-                label={`${labelUnit} ${value.time} / ${labelPrice} OCEAN ≈ ${formattedCurrencySymbol}`}
-              />
-            </RadioGroup>
-          </FormControl>
-        </div>
-      )
-    }
-  )
+    return (
+      <div key={value.id}>
+        <FormControl sx={{ m: -0.2 }} variant="standard">
+          <RadioGroup
+            aria-labelledby="demo-error-radios"
+            name={value.id}
+            value={selectedValue}
+            onChange={(e) => {
+              setSelectedSubs(formattedCurrencySymbol)
+            }}
+          >
+            <FormControlLabel
+              value={value.id}
+              control={
+                <Radio
+                  {...controlProps(value.id)}
+                  sx={{
+                    color: grey[600],
+                    '&.Mui-checked': {
+                      color: pink[600]
+                    }
+                  }}
+                />
+              }
+              label={`${labelUnit} ${value.time} / ${labelPrice} OCEAN ≈ ${formattedCurrencySymbol}`}
+            />
+          </RadioGroup>
+        </FormControl>
+      </div>
+    )
+  })
 
   return <React.Fragment>{subOptions}</React.Fragment>
 }

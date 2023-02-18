@@ -39,7 +39,7 @@ declare global {
   interface AccessDetails {
     type: 'fixed' | 'free' | 'timed' | 'NOT_SUPPORTED'
     price: string
-    subsPrice: string
+    subsPrice: string[]
     addressOrId: string
     baseToken: TokenInfo
     datatoken: TokenInfo

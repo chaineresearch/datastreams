@@ -11,7 +11,6 @@ import Link from 'next/link'
 export default function MetaFull({ ddo }: { ddo: Asset }): ReactElement {
   const { isInPurgatory } = useAsset()
 
-  console.log({ ddo })
   function DockerImage() {
     const containerInfo = ddo?.metadata?.algorithm?.container
     const { image, tag } = containerInfo

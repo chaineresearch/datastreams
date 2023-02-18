@@ -15,10 +15,10 @@ index e2c9a8a..1537404 100644
       * Name of the entity generating this data (e.g. Tfl, Disney Corp, etc.).
       * @type {string}
 diff --git a/node_modules/@oceanprotocol/lib/dist/src/@types/DDO/Service.d.ts b/node_modules/@oceanprotocol/lib/dist/src/@types/DDO/Service.d.ts
-index 7c88c20..42f2499 100644
+index 7c88c20..432b3ca 100644
 --- a/node_modules/@oceanprotocol/lib/dist/src/@types/DDO/Service.d.ts
 +++ b/node_modules/@oceanprotocol/lib/dist/src/@types/DDO/Service.d.ts
-@@ -56,6 +56,16 @@ export interface Service {
+@@ -56,6 +56,21 @@ export interface Service {
       * @type {string}
       */
      files: string;
@@ -32,6 +32,11 @@ index 7c88c20..42f2499 100644
 +     * @type {string}
 +     */
 +    docs?: string;
++    /**
++     * subscription options
++     * @type {string[]}
++     */
++    timedPrice?: string[];
      /**
       * Datatoken address
       * @type {string}

@@ -59,9 +59,11 @@ export async function transformPublishFormToDdo(
   datatokenAddress?: string,
   nftAddress?: string
 ): Promise<DDO> {
+  const { subsPrice } = values.pricing
   const { metadata, services, user } = values
   LoggerInstance.log('MyFile:', values)
   LoggerInstance.log('services:', services[0])
+  console.log({ todaySubsPrice: subsPrice })
   const { chainId, accountId } = user
   const {
     type,
@@ -156,6 +158,7 @@ export async function transformPublishFormToDdo(
     files: filesEncrypted || '',
     docs: values.metadata.type === 'datastream' ? links[0].url : '',
     streamFiles: values.metadata.type === 'datastream' ? files[0].url : '',
+    timedPrice: values.metadata.type === 'datastream' ? subsPrice : [],
     datatokenAddress,
     serviceEndpoint: providerUrl.url,
     timeout: mapTimeoutStringToSeconds(timeout),
