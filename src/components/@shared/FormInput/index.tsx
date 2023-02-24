@@ -22,6 +22,7 @@ const cx = classNames.bind(styles)
 export interface InputProps {
   name: string
   label?: string | ReactNode
+  streamLabel?: string | ReactNode
   placeholder?: string
   required?: boolean
   help?: string
@@ -88,6 +89,7 @@ function checkError(
 export default function Input(props: Partial<InputProps>): ReactElement {
   const {
     label,
+    streamLabel,
     help,
     prominentHelp,
     additionalComponent,
@@ -129,7 +131,9 @@ export default function Input(props: Partial<InputProps>): ReactElement {
   return (
     <div className={styleClasses}>
       <Label htmlFor={props.name}>
-        {label}
+        {props.form?.values.metadata.type === 'datastream'
+          ? streamLabel
+          : label}
         {props.required && (
           <span title="Required" className={styles.required}>
             *

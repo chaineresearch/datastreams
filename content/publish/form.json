@@ -88,6 +88,7 @@
       {
         "name": "dataTokenOptions",
         "label": "Datatoken",
+        "streamLabel": "Datatoken",
         "type": "datatoken",
         "help": "The datatoken used for accessing this asset will be created with this name & symbol.",
         "required": true
@@ -95,6 +96,7 @@
       {
         "name": "providerUrl",
         "label": "Provider URL",
+        "streamLabel": "Provider URL",
         "type": "providerUrl",
         "help": "Enter the URL for your custom [provider](https://github.com/oceanprotocol/provider/) or leave as is to use the default one. If you change your provider URL after adding your file, please add & validate your file again.",
         "placeholder": "e.g. https://provider.oceanprotocol.com/",
@@ -103,6 +105,7 @@
       {
         "name": "files",
         "label": "File",
+        "streamLabel": "Datastream Endpoint URL",
         "placeholder": "e.g. https://file.com/file.json",
         "help": "This URL will be stored encrypted after publishing. **Please make sure that the endpoint is accessible over the internet and is not protected by a firewall or by credentials.** For a compute dataset, your file should match the file type required by the algorithm, and should not exceed 1 GB in file size. ",
         "prominentHelp": true,
@@ -111,7 +114,8 @@
       },
       {
         "name": "links",
-        "label": "Sample File",
+        "label": "Sample Files",
+        "streamLabel": "Datastream API Docs URL",
         "placeholder": "e.g. https://file.com/samplefile.json",
         "help": "This file should reveal the data structure of your dataset, e.g. by including the header and one line of a CSV file. This file URL will be publicly available after publishing. **Please make sure that the endpoint is accessible over the internet and is not protected by a firewall or by credentials.**",
         "prominentHelp": true,
@@ -120,6 +124,7 @@
       {
         "name": "algorithmPrivacy",
         "label": "Algorithm Privacy",
+        "streamLabel": "Algorithm Privacy",
         "type": "checkbox",
         "options": ["Keep my algorithm private"],
         "help": "By default, your algorithm can be downloaded for free or a fixed price, in addition to running in compute jobs. Enabling this option will prevent downloading, so your algorithm can only be run as part of a compute job on a dataset.",
@@ -128,6 +133,7 @@
       {
         "name": "access",
         "label": "Access Type",
+        "streamLabel": "Access Type",
         "help": "Choose how you want your files to be accessible for the specified price.",
         "type": "boxSelection",
         "options": ["Access", "Compute", "Stream"],
@@ -138,6 +144,7 @@
       {
         "name": "timeout",
         "label": "Timeout",
+        "streamLabel": "Timeout",
         "help": "Define how long buyers should be able to download the dataset again after the initial purchase.",
         "type": "select",
         "options": [

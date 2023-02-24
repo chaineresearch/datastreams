@@ -31,10 +31,11 @@ export default function MetaFull({ ddo }: { ddo: Asset }): ReactElement {
         <MetaItem title="Docker Image" content={<DockerImage />} />
       )}
       <MetaItem title="DID" content={<code>{ddo?.id}</code>} />
-      {ddo?.metadata.type === 'datastream' ? (
+      {/* {ddo?.metadata.type === 'datastream' ? (
         <>
           <MetaItem
             title="Stream API Documentation URL"
+            // title="Sample Data"
             content={
               <Link href={ddo?.services[0].docs}>
                 <a title="visit API page.">{ddo?.services[0].docs}</a>
@@ -44,7 +45,7 @@ export default function MetaFull({ ddo }: { ddo: Asset }): ReactElement {
         </>
       ) : (
         ''
-      )}
+      )} */}
     </div>
   ) : null
 }
