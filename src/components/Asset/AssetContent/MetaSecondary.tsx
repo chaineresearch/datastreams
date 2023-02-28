@@ -23,12 +23,15 @@ export default function MetaSecondary({ ddo }: { ddo: Asset }): ReactElement {
   console.log({ metadata: ddo?.metadata })
   return (
     <aside className={styles.metaSecondary}>
-      {ddo?.metadata.links?.length > 0 && (
+      {ddo?.services[0].streamFiles?.length > 0 && (
         <div className={styles.samples}>
           <MetaItem
             title="Sample Data"
             content={
-              <SampleButton url={ddo?.metadata.links[0]} ddo={undefined} />
+              <SampleButton
+                url={ddo?.services[0].streamFiles}
+                ddo={undefined}
+              />
             }
           />
         </div>

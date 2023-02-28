@@ -5,6 +5,7 @@
       {
         "name": "nft",
         "label": "Data NFT",
+        "streamLabel": "Data NFT",
         "type": "nft",
         "help": "All metadata is stored on-chain in a newly deployed ERC-721 contract representing this asset, created with this name, symbol, description and image.",
         "required": true
@@ -12,6 +13,7 @@
       {
         "name": "type",
         "label": "Asset Type",
+        "streamLabel": "Asset Type",
         "type": "boxSelection",
         "options": ["Dataset", "Algorithm", "Datastream"],
         "required": true
@@ -19,12 +21,14 @@
       {
         "name": "name",
         "label": "Title",
+        "streamLabel": "Title",
         "placeholder": "e.g. Shapes of Desert Plants",
         "required": true
       },
       {
         "name": "description",
         "label": "Description",
+        "streamLabel": "Description",
         "help": "Add a thorough description with as much detail as possible. You can use [Markdown](https://daringfireball.net/projects/markdown/basics). You can change the description at any time. If you provide personal data, please note that it will remain in the transaction history. For more information on how personal data is handled within the metadata, please refer to our [privacy policy](/privacy/en).",
         "type": "textarea",
         "required": true
@@ -32,6 +36,7 @@
       {
         "name": "author",
         "label": "Author",
+        "streamLabel": "Author",
         "placeholder": "e.g. Jelly McJellyfish",
         "help": "Give proper attribution for your dataset. You are welcome to use a pseudonym, and you can change your author name at any time. Please note that it will remain in the transaction history. For more information on how personal data is handled within the metadata, please refer to our [privacy policy](/privacy/en).",
         "required": true
@@ -39,6 +44,7 @@
       {
         "name": "tags",
         "label": "Tags",
+        "streamLabel": "Tags",
         "placeholder": "e.g. logistics, ai",
         "help": "Separate tags with comma."
       },
@@ -76,6 +82,7 @@
       {
         "name": "termsAndConditions",
         "label": "Terms & Conditions",
+        "streamLabel": "Terms & Conditions",
         "type": "checkbox",
         "options": ["I agree to the Terms and Conditions"],
         "required": true
@@ -88,7 +95,6 @@
       {
         "name": "dataTokenOptions",
         "label": "Datatoken",
-        "streamLabel": "Datatoken",
         "type": "datatoken",
         "help": "The datatoken used for accessing this asset will be created with this name & symbol.",
         "required": true
@@ -96,7 +102,6 @@
       {
         "name": "providerUrl",
         "label": "Provider URL",
-        "streamLabel": "Provider URL",
         "type": "providerUrl",
         "help": "Enter the URL for your custom [provider](https://github.com/oceanprotocol/provider/) or leave as is to use the default one. If you change your provider URL after adding your file, please add & validate your file again.",
         "placeholder": "e.g. https://provider.oceanprotocol.com/",
@@ -105,9 +110,10 @@
       {
         "name": "files",
         "label": "File",
-        "streamLabel": "Datastream Endpoint URL",
+        "endpointLabel": "Datastream Endpoint URL",
         "placeholder": "e.g. https://file.com/file.json",
         "help": "This URL will be stored encrypted after publishing. **Please make sure that the endpoint is accessible over the internet and is not protected by a firewall or by credentials.** For a compute dataset, your file should match the file type required by the algorithm, and should not exceed 1 GB in file size. ",
+        "endpointHelp": "This URL will be stored encrypted after publishing. **Please make sure that the endpoint is accessible over the internet and is not protected by a firewall or by credentials.** ",
         "prominentHelp": true,
         "type": "files",
         "required": true
@@ -115,16 +121,18 @@
       {
         "name": "links",
         "label": "Sample Files",
-        "streamLabel": "Datastream API Docs URL",
+        "docsLabel": "Datastream API Docs URL",
         "placeholder": "e.g. https://file.com/samplefile.json",
+        "docsPlaceholder": "e.g. https://example.com/docs.html",
         "help": "This file should reveal the data structure of your dataset, e.g. by including the header and one line of a CSV file. This file URL will be publicly available after publishing. **Please make sure that the endpoint is accessible over the internet and is not protected by a firewall or by credentials.**",
+        "docsHelp": "This URL should reference the API docs for your datastream so users can learn how to access and parse your feed. This URL will be publicly available after publishing. **Please make sure that the endpoint is accessible over the internet and is not protected by a firewall or by credentials.**",
         "prominentHelp": true,
+        "extra": false,
         "type": "files"
       },
       {
         "name": "algorithmPrivacy",
         "label": "Algorithm Privacy",
-        "streamLabel": "Algorithm Privacy",
         "type": "checkbox",
         "options": ["Keep my algorithm private"],
         "help": "By default, your algorithm can be downloaded for free or a fixed price, in addition to running in compute jobs. Enabling this option will prevent downloading, so your algorithm can only be run as part of a compute job on a dataset.",
@@ -133,7 +141,6 @@
       {
         "name": "access",
         "label": "Access Type",
-        "streamLabel": "Access Type",
         "help": "Choose how you want your files to be accessible for the specified price.",
         "type": "boxSelection",
         "options": ["Access", "Compute", "Stream"],
@@ -144,7 +151,6 @@
       {
         "name": "timeout",
         "label": "Timeout",
-        "streamLabel": "Timeout",
         "help": "Define how long buyers should be able to download the dataset again after the initial purchase.",
         "type": "select",
         "options": [

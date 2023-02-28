@@ -22,7 +22,8 @@ const cx = classNames.bind(styles)
 export interface InputProps {
   name: string
   label?: string | ReactNode
-  streamLabel?: string | ReactNode
+  // streamLabel?: string | ReactNode
+  // extra?: boolean
   placeholder?: string
   required?: boolean
   help?: string
@@ -89,7 +90,8 @@ function checkError(
 export default function Input(props: Partial<InputProps>): ReactElement {
   const {
     label,
-    streamLabel,
+    // streamLabel,
+    // extra,
     help,
     prominentHelp,
     additionalComponent,
@@ -127,13 +129,14 @@ export default function Input(props: Partial<InputProps>): ReactElement {
       )
     }
   }, [isFormikField, props.form?.values])
-
+  console.log({ props })
   return (
     <div className={styleClasses}>
       <Label htmlFor={props.name}>
-        {props.form?.values.metadata.type === 'datastream'
+        {label}
+        {/* {props.form?.values.metadata.type === 'datastream'
           ? streamLabel
-          : label}
+          : label} */}
         {props.required && (
           <span title="Required" className={styles.required}>
             *

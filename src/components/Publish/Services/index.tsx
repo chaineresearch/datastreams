@@ -1,6 +1,6 @@
 import Input from '@shared/FormInput'
 import { Field, useFormikContext } from 'formik'
-import React, { ReactElement, useEffect } from 'react'
+import React, { ReactElement, useEffect, useState } from 'react'
 import IconDownload from '@images/download.svg'
 import IconCompute from '@images/compute.svg'
 import IconStream from '@images/stream.svg'
@@ -51,11 +51,45 @@ export default function ServicesFields(): ReactElement {
         values.services[0].access === accessTypeOptionsTitles[2].toLowerCase()
     }
   ]
+  const [endpointHelp, setEndpointHelp] = useState('')
+  const [docsHelp, setDocsHelp] = useState('')
+  const [endPointLabel, setEndpointLabel] = useState('')
+  const [docsLabel, setDocsLabel] = useState('')
+  const [docsPlaceholder, setDocsPlaceholder] = useState('')
+
+  console.log({
+    names: content.services.fields.map((val) => val)
+  })
+  useEffect(() => {
+    content.services.fields.forEach((val) => {
+      if (val?.name === 'links') {
+        if (values.metadata.type === 'datastream') {
+          setDocsLabel(val?.docsLabel)
+          setDocsHelp(val?.docsHelp)
+          setDocsPlaceholder(val?.docsPlaceholder)
+        } else {
+          setDocsLabel(val?.label)
+          setDocsHelp(val?.help)
+          setDocsPlaceholder(val?.placeholder)
+        }
+      }
+      if (val?.name === 'files') {
+        if (values.metadata.type === 'datastream') {
+          setEndpointLabel(val?.endpointLabel)
+          setEndpointHelp(val?.endpointHelp)
+          setDocsPlaceholder(val?.docsPlaceholder)
+        } else {
+          setEndpointLabel(val?.label)
+          setEndpointHelp(val?.help)
+          setDocsPlaceholder(val?.placeholder)
+        }
+      }
+    })
+  }, [values])
 
   useEffect(() => {
     if (values.metadata.type === 'datastream') {
       setFieldValue('services[0].timeout', 'Use timed pricing')
-      // setFieldValue('pricing.amountDataToken', 1000)
     }
   }, [setFieldValue, values])
 
@@ -122,11 +156,25 @@ export default function ServicesFields(): ReactElement {
         {...getFieldContent('files', content.services.fields)}
         component={Input}
         name="services[0].files"
+        label={endPointLabel}
+        help={endpointHelp}
+        placeholder={docsPlaceholder}
       />
+      {values.metadata.type === 'datastream' && (
+        <Field
+          {...getFieldContent('links', content.services.fields)}
+          component={Input}
+          name="services[0].links"
+          label="Sample Files"
+        />
+      )}
       <Field
         {...getFieldContent('links', content.services.fields)}
         component={Input}
         name="services[0].links"
+        label={docsLabel}
+        help={docsHelp}
+        placeholder={docsPlaceholder}
       />
       <Field
         {...getFieldContent('timeout', content.services.fields)}
