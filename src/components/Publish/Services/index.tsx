@@ -160,14 +160,14 @@ export default function ServicesFields(): ReactElement {
         help={endpointHelp}
         placeholder={docsPlaceholder}
       />
-      {values.metadata.type === 'datastream' && (
+      {/* {values.metadata.type === 'datastream' && (
         <Field
           {...getFieldContent('links', content.services.fields)}
           component={Input}
           name="services[0].links"
           label="Sample Files"
         />
-      )}
+      )} */}
       <Field
         {...getFieldContent('links', content.services.fields)}
         component={Input}
